@@ -1,1 +1,1 @@
-# IS
+# InfinitySchool
