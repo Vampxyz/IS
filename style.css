@@ -25,6 +25,8 @@ header {
     color: var(--red);
     font-weight: 700;
     font-size: clamp(1rem, 4vw, 2rem);
+
+    cursor: pointer;
 }
 
 /* NAV */
@@ -129,6 +131,9 @@ header #search button:hover {
     position: relative;
     top: -4px;
     box-shadow: 0px 4px 0px #c64132df;
+}
+#face button:hover {
+    background-color: #e74938;
 }
 #face button:active {
     position: relative;
