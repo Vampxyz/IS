@@ -7,8 +7,6 @@ function addProduct() {
     const newProduct = {
         imageUrl: '',
         tags: addTags(),
-        title: prompt('Digite o t tulo do seu novo produto:'),
-        description: prompt('Digite a descri o do seu novo produto:'),
         title: prompt('Digite o título do seu novo produto:'),
         description: prompt('Digite a descrição do seu novo produto:'),
     }

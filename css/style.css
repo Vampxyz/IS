@@ -219,7 +219,7 @@ header #search button:hover {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 #products .product img {
     width: 100%;
@@ -249,7 +249,7 @@ header #search button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 0px;
 }
 #products .product .text h2 {
     font-weight: 700;
