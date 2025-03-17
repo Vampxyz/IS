@@ -12,6 +12,10 @@
     --blue: #8eb6f5;
 }
 
+body {
+    background-color: #eee;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -86,8 +90,6 @@ header #search button:hover {
 
 /* Background Image */
 #face {
-    background-image: url(assets/background.jpg);
-    background-position: 150px -150px;
     width: 100vw;
     height: 400px;
 
@@ -99,6 +101,8 @@ header #search button:hover {
 
     color: white;
     z-index: -99;
+
+    background-color: rgba(0, 0, 0, .85);
 }
 #face img {
     width: 100px;
@@ -147,8 +151,8 @@ header #search button:hover {
     display: flex;
     align-items: center;
     flex-direction: column;
+
     gap: 16px;
-    
 }
 
 #categories h1 {
@@ -160,11 +164,20 @@ header #search button:hover {
 
 #categories .nav-categories {
     display: flex;
-    gap: 24px;
+    align-items: center;
+    gap: 16px;
+
+    min-width: 400px;
+    overflow: hidden;
 }
+#categories .nav-categories div {
+    display: flex;
+    gap: 16px;
+}
+
 #categories .nav-categories a {
     color: black;
-    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    font-size: clamp(.85rem, 2vw, 1.3rem);
     position: relative;
 }
 #categories .nav-categories a::before {
@@ -189,9 +202,11 @@ header #search button:hover {
     padding: clamp(1rem, 4vw, 2rem) 0;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 325px);
+    grid-template-rows: repeat(3, 465px);
     gap: 16px;
+
+    width: 1000px;
 }
 #products h1 {
     font-weight: 700;
@@ -210,13 +225,16 @@ header #search button:hover {
     width: 100%;
     height: 300px;
 }
-
+#products .product .tag {
+    display: flex;
+    gap: 8px;
+}
 #products .product span {
     color: white;
     font-weight: 700;
     font-size: clamp(0.6rem, 2vw, 0.8rem);
 
-    padding: 6px 10px;
+    padding: 6px 10px;    
 
     border-radius: 12px;
     border: none;
@@ -233,15 +251,43 @@ header #search button:hover {
     align-items: center;
     gap: 4px;
 }
-#products .product h2 {
+#products .product .text h2 {
     font-weight: 700;
     font-size: clamp(1rem, 4vw, 1rem);
 }
-#products .product p {
-    font-size: clamp(0.8rem, 2vw, 1rem);
+#products .product .text p {
+    font-size: clamp(0.2rem, 0.9rem, 1rem);
 }
 
+/* Product Button */
 #products .product button {
+    padding: clamp(0.7rem, 3rem, 0.8rem) clamp(1.5rem, 4vw, 1.2rem);
+
+    border-radius: 8px;
+    border: none;
+    
+    background-color: var(--red);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}
+#products .product button:hover {
+    background-color: #e74938;
+}
+#products .product button:active {
+    position: relative;
+    top: 3px;
+    box-shadow: 0px 0px 0px #c64132df;
+}
+
+/* Add Button */
+#products #addbtn {
     padding: clamp(0.5rem, 2vw, 0.8rem) clamp(1rem, 4vw, 1rem);
 
     border-radius: 8px;
@@ -249,16 +295,23 @@ header #search button:hover {
     
     background-color: var(--red);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     font-size: clamp(0.6rem, 2vw, 1rem);
     font-weight: 700;
     color: white;
     cursor: pointer;
 }
-#products .product button i {
-    margin-left: 4px;
-
-    font-size: clamp(0.8rem, 2vw, 1rem);
-
+#products #addbtn:hover {
+    background-color: #e74938;
+}
+#products #addbtn:active {
     position: relative;
-    top: 15%;
+    top: 3px;
+    box-shadow: 0px 0px 0px #c64132df;
+}
+#products #addbtn i {
+    font-size: clamp(0.2rem, 5vw, 5rem);
 }
