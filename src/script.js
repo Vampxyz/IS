@@ -9,6 +9,7 @@ function addProduct() {
         tags: addTags(),
         title: prompt('Digite o título do seu novo produto:'),
         description: prompt('Digite a descrição do seu novo produto:'),
+        price: prompt('Digite o preço do seu novo produto:')
     }
 
     const productHTML = `
@@ -21,7 +22,8 @@ function addProduct() {
                 <h2>${newProduct.title}</h2>
                 <p>${newProduct.description}</p>
             </div>
-            <button>Acessar</button>
+            <p class="price">R$ ${newProduct.price}</p>
+            <button>Comprar</button>
         </div>
     `
 

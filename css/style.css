@@ -5,20 +5,32 @@
     text-decoration: none;
     list-style: none;
     font-family: sans-serif;
+
+    scrollbar-width: none;
+    scrollbar-color: var(--red) var(--bg);
+    scrollbar-gutter: stable;
 }
 
 :root {
     --red: #c64132;
+    --dark-red: #9d1a1a;
     --blue: #8eb6f5;
+    --ice-blue: #ebedf0;
+    --gray: #666666;
+
+    --bg: #f9fafb;
 }
 
 body {
-    background-color: #eee;
+    background-color: var(--bg);
+}
+h1, h2, h3, h4, h5, h6, p, q, span {
+    cursor: default;
 }
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 
     padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, calc(4vw + 2rem), 8rem);
@@ -26,7 +38,7 @@ header {
 
 /* LOGO */
 #logo {
-    color: var(--red);
+    color: var(--dark-red);
     font-weight: 700;
     font-size: clamp(1rem, 4vw, 2rem);
 
@@ -68,7 +80,7 @@ header #search input {
     padding: 8px 16px;
 
     border: none;
-    outline: 1px solid black;
+    outline: 1px solid var(--ice-blue);
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
@@ -76,22 +88,24 @@ header #search button {
     padding: 8px 16px;
 
     border: none;
-    outline: 1px solid black;
+    outline: 1px solid var(--ice-blue);
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
 
-    background-color: var(--red);
+    background-color: var(--dark-red);
     color: white;
     cursor: pointer;
 }
 header #search button:hover {
-    background-color: #e74938;
+    background-color: var(--red);
 }
 
 /* Background Image */
 #face {
     width: 100vw;
-    height: 400px;
+    height: fit-content;
+
+    padding: 24px;
 
     display: flex;
     flex-direction: column;
@@ -105,8 +119,8 @@ header #search button:hover {
     background-color: rgba(0, 0, 0, .85);
 }
 #face img {
-    width: 100px;
-    height: 100px;
+    width: clamp(6rem, 10vw, 10rem);
+    height: clamp(6rem, 10vw, 10rem);
     
 }
 
@@ -114,38 +128,45 @@ header #search button:hover {
     display: flex;
     text-align: center;
     flex-direction: column;
-    gap: 8px;
-
+    gap: 22px;
+}
+#face .text h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 700;
+}
+#face .text p {
+    font-size: clamp(.9rem, 2vw, 1.2rem);
+    font-weight: 100;
+    line-height: 1.5;
 }
 
 #face button {
-    padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+    padding: clamp(1rem, 2vw, 1.2rem) clamp(1.4rem, 4vw, 2rem);
 
     border-radius: 8px;
     border: none;
     
-    background-color: var(--red);
+    background-color: var(--dark-red);
 
-    font-size: clamp(0.6rem, 2vw, 1rem);
+    font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 700;
     color: white;
     cursor: pointer;
     
     position: relative;
     top: -4px;
-    box-shadow: 0px 4px 0px #c64132df;
+    box-shadow: 0px 4px 0px #781414;
 }
 #face button:hover {
-    background-color: #e74938;
+    background-color: var(--red);
 }
 #face button:active {
     position: relative;
     top: 3px;
-    box-shadow: 0px 0px 0px #c64132df;
+    box-shadow: 0px 0px 0px var(--dark-red);
 }
 
-/* Categories */
+/* --------------------------------------------------------------Categories-------------------------------------------------------------- */
 #categories {
     padding: clamp(1rem, 4vw, 2rem) clamp(0.5rem, calc(4vw + 2rem), 8rem);
     display: flex;
@@ -157,7 +178,7 @@ header #search button:hover {
 
 #categories h1 {
     font-weight: 700;
-    font-size: clamp(1rem, 4vw, 2rem);
+    font-size: clamp(1.5rem, 4vw, 2rem);
     margin-bottom: clamp(0.5rem, 2vw, 1rem);
     margin-top: clamp(0.5rem, 2vw, 1rem);
 }
@@ -177,7 +198,7 @@ header #search button:hover {
 
 #categories .nav-categories a {
     color: black;
-    font-size: clamp(.85rem, 2vw, 1.3rem);
+    font-size: clamp(1rem, 2vw, 1.2rem);
     position: relative;
 }
 #categories .nav-categories a::before {
@@ -197,20 +218,20 @@ header #search button:hover {
     width: 100%;
 }
 
-/* Products */
+/* --------------------------------------------------------------Products-------------------------------------------------------------- */
 #products {
     padding: clamp(1rem, 4vw, 2rem) 0;
 
     display: grid;
     grid-template-columns: repeat(3, 325px);
-    grid-template-rows: repeat(3, 465px);
-    gap: 16px;
+    grid-template-rows: repeat(1, 465px);
+    gap: 24px;
 
-    width: 1000px;
+    width: fit-content;
 }
 #products h1 {
     font-weight: 700;
-    font-size: clamp(1rem, 4vw, 2rem);
+    font-size: clamp(1.5rem, 4vw, 2rem);
     margin-bottom: clamp(0.5rem, 2vw, 1rem);
 }
 
@@ -219,11 +240,22 @@ header #search button:hover {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
+
+    outline: 0.20px solid rgba(0, 0, 0, .05);
+    border-radius: 6px;
+
+    padding: 12px;
+
+    background-color: white;
 }
 #products .product img {
     width: 100%;
-    height: 300px;
+    height: 250px;
+
+    border: none;
+    outline: none;
+    border-radius: 12px;
 }
 #products .product .tag {
     display: flex;
@@ -257,6 +289,13 @@ header #search button:hover {
 }
 #products .product .text p {
     font-size: clamp(0.2rem, 0.9rem, 1rem);
+    font-weight: 600;
+    color: var(--grayFf);
+}
+#products .product .price {
+    font-weight: 700;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: var(--red);
 }
 
 /* Product Button */
@@ -266,7 +305,7 @@ header #search button:hover {
     border-radius: 8px;
     border: none;
     
-    background-color: var(--red);
+    background-color: var(--dark-red);
 
     display: flex;
     align-items: center;
@@ -278,40 +317,181 @@ header #search button:hover {
     cursor: pointer;
 }
 #products .product button:hover {
-    background-color: #e74938;
+    background-color: var(--red);
 }
 #products .product button:active {
     position: relative;
     top: 3px;
-    box-shadow: 0px 0px 0px #c64132df;
+    box-shadow: 0px 0px 0px var(--dark-red);
 }
 
 /* Add Button */
 #products #addbtn {
-    padding: clamp(0.5rem, 2vw, 0.8rem) clamp(1rem, 4vw, 1rem);
-
     border-radius: 8px;
     border: none;
     
-    background-color: var(--red);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: clamp(0.6rem, 2vw, 1rem);
-    font-weight: 700;
+    
     color: white;
     cursor: pointer;
+
+    background-color: var(--dark-red);
 }
 #products #addbtn:hover {
-    background-color: #e74938;
+    background-color: var(--red);
 }
 #products #addbtn:active {
     position: relative;
     top: 3px;
-    box-shadow: 0px 0px 0px #c64132df;
+    box-shadow: 0px 0px 0px var(--dark-red);
 }
 #products #addbtn i {
-    font-size: clamp(0.2rem, 5vw, 5rem);
+    font-size: clamp(4rem, 5vw, 5rem);
+}
+
+/* --------------------------------------------------------------Feedback-------------------------------------------------------------- */
+#feedback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    padding: 48px;
+    width: 100%;
+
+    background-color: white;
+}
+#feedback h1 {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+
+}
+
+/* Messages */
+#feedback .messages {
+    display: grid;
+    grid-template-columns: repeat(3, 375px);
+    grid-template-rows: repeat(1, 145px);
+    gap: 24px;
+}
+#feedback .messages .msg {
+    display: flex;
+    flex-direction: column;   
+    text-align: center;
+    gap: 16px;
+
+    padding: 32px;
+    border-radius: 8px;
+
+    background-color: var(--bg);
+}
+.messages .msg q {
+    font-size: clamp(1rem, 2vw, 1rem);
+    font-weight: 100;
+    line-height: 1.5;
+    font-style: italic;
+
+    color: var(gray);
+}
+.messages .msg span {
+    font-size: clamp(.95rem, 2vw, 1rem);
+    font-weight: 600;
+    color: var(--dark-red);
+}
+
+/* --------------------------------------------------------------Newsletter-------------------------------------------------------------- */
+#newsletter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    padding: 32px;
+    margin: 32px 0px;
+
+    width: 100%;
+
+    color: white;
+    background-color: var(--dark-red);
+}
+#newsletter h1 {
+    font-weight: 700;
+    font-size: clamp(1rem, 4vw, 2rem);
+}
+#newsletter p {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 100;
+    line-height: 1.5;
+}
+
+#newsletter .form {
+    display: flex;
+    gap: 8px;
+}
+#newsletter .form input {
+    padding: 12px;
+
+    border: none;
+    outline: none;
+    border-radius: 6px;
+
+    width: 270px;
+}
+#newsletter .form button {
+    padding: 12px 24px;
+
+    border: none;
+    outline: none;
+    border-radius: 6px;
+
+    color: var(--red);
+    background-color: white;
+
+    cursor: pointer;
+}
+
+/* --------------------------------------------------------------Footer-------------------------------------------------------------- */
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    padding: 32px;
+
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    background-color: white;
+    
+}
+
+footer .rights {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+footer .rights h3 {
+    font-weight: 700;
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+    color: var(--dark-red);
+}
+footer .rights p {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 100;
+    color: var(--gray);
+}
+
+footer .links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+
+    color: var(--gray);
+}
+footer .links li {
+    cursor: pointer;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
 }
