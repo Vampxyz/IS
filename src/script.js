@@ -82,122 +82,142 @@ function addTags() {
 buttonAdd.addEventListener("click", addProduct);
 
 function updateEditButtons() {
-
   const editButtons = document.querySelectorAll(".edit");
 
   editButtons.forEach((button, index) => {
-
     button.onclick = () => {
       // Produto atual
       const product = allProducts[index];
 
-      const opt = Number(
-        prompt(
-          "O que você deseja editar: \n1 - Tag \n2 - Título \n3 - Descrição \n4 - Preço"
-        )
-      );
+      // Loop pra editar
+      let continueEditing = true;
 
-      switch (opt) {
-        case 1: // TAG
-          // Verifica se product.tags existe e é um array
-          if (!Array.isArray(product.tags)) {
-            product.tags = [];
-          }
+      while (continueEditing) {
+        const opt = Number(
+          prompt(
+            "O que você deseja editar: \n1 - Tag \n2 - Título \n3 - Descrição \n4 - Preço \n5 - Sair e salvar"
+          )
+        );
 
-          // Verificador de tags
-          if (product.tags.length === 0) {
-            alert("Este produto não tem tags para editar.");
+        switch (opt) {
+          case 1: // TAG
+            // Verifica se product.tags existe e é um array
+            if (!Array.isArray(product.tags)) {
+              product.tags = [];
+            }
+
+            // Verificador de tags
+            if (product.tags.length === 0) {
+              alert("Este produto não tem tags para editar.");
+              break;
+            }
+
+            // Exibe as tags disponíveis com índice
+            let tagList = product.tags
+              .map((tag, i) => `${i + 1} - ${tag}`)
+              .join("\n");
+            let tagIndex =
+              Number(prompt(`Escolha a tag para editar ou digite 0 para cancelar ou 100 pra adiconar uma nova tag:\n${tagList}`)) - 1;
+
+            
+            if (tagIndex === 99) { // Adiciona uma nova tag
+
+              let addNewTag = prompt(
+                "Digite a nova tag que deseja adicionar:"
+              );
+              
+              if (addNewTag) {
+                product.tags.push(addNewTag);                
+              }
+              
+            } else if ( // Verifica se o índice é válido 
+
+              tagIndex < 0 ||
+              tagIndex >= product.tags.length ||
+              isNaN(tagIndex)
+
+            ) {
+              break;
+
+            } else { // Pergunta a nova tag
+
+              let newTag = prompt(
+                `Digite a nova tag para substituir "${product.tags[tagIndex]}":`
+              );
+
+              if (newTag) {
+                product.tags[tagIndex] = newTag;
+              }
+            }
+
+            // Atualiza as tags no HTML
+            const productElement = button.closest(".product"); // Seleciona o produto certo
+            const tagContainer = productElement.querySelector(".tag");
+            tagContainer.innerHTML = product.tags
+              .map((tag) => `<span>${tag}</span>`)
+              .join("");
+
             break;
-          }
 
-          // Exibe as tags disponíveis com índice
-          let tagList = product.tags
-            .map((tag, i) => `${i + 1} - ${tag}`)
-            .join("\n");
-          let tagIndex =
-            Number(prompt(`Escolha a tag para editar:\n${tagList}`)) - 1;
+          case 2: // TITLE
+            const newTitle = prompt(
+              "Digite o novo título: ",
+              product.title || product.title
+            );
 
-          // Verifica se o índice é válido
-          if (
-            tagIndex < 0 ||
-            tagIndex >= product.tags.length ||
-            isNaN(tagIndex)
-          ) {
-            alert("Opção inválida!");
+            product.title = newTitle;
+
+            // Atualizar o Html com o novo titulo
+            const titleElement = button
+              .closest(".product")
+              .querySelector(".text h2");
+
+            titleElement.textContent = product.title;
+
             break;
-          }
 
-          // Pergunta a nova tag
-          let newTag = prompt(
-            `Digite a nova tag para substituir "${product.tags[tagIndex]}":`
-          );
-          if (newTag) {
-            product.tags[tagIndex] = newTag;
-          }
+          case 3: // DESCRIPTION
+            const newDesc = prompt(
+              "Digite a nova descrição: ",
+              product.description || product.description
+            );
 
-          // Atualiza as tags no HTML
-          const productElement = button.closest(".product"); // Seleciona o produto certo
-          const tagContainer = productElement.querySelector(".tag");
-          tagContainer.innerHTML = product.tags
-            .map((tag) => `<span>${tag}</span>`)
-            .join("");
+            product.description = newDesc;
 
-          break;
+            // Atualizar o Html com a nova descrição
+            const descElement = button
+              .closest(".product")
+              .querySelector(".text p");
 
-        case 2: // TITLE
-          const newTitle = prompt(
-            "Digite o novo título: ",
-            product.title || product.title
-          );
+            descElement.textContent = product.description;
 
-          product.title = newTitle;
+            break;
 
-          // Atualizar o Html com o novo titulo
-          const titleElement = button
-            .closest(".product")
-            .querySelector(".text h2");
+          case 4: // PRICE
+            const newPrice = prompt(
+              "Digite o novo preço: ",
+              product.price || product.price
+            );
 
-          titleElement.textContent = product.title;
+            product.price = newPrice;
 
-          break;
+            // Atualizar o Html com o novo preco
+            const priceElement = button
+              .closest(".product")
+              .querySelector(".price");
 
-        case 3: // DESCRIPTION
-          const newDesc = prompt(
-            "Digite a nova descrição: ",
-            product.description || product.description
-          );
+            priceElement.textContent = `R$ ${product.price}`;
 
-          product.description = newDesc;
+            break;
 
-          // Atualizar o Html com a nova descrição
-          const descElement = button
-            .closest(".product")
-            .querySelector(".text p");
+          case 5: // SAIR
+            continueEditing = false;
+            break;
 
-          descElement.textContent = product.description;
-
-          break;
-
-        case 4: // PRICE
-          const newPrice = prompt(
-            "Digite o novo preço: ",
-            product.price || product.price
-          );
-
-          product.price = newPrice;
-
-          // Atualizar o Html com o novo preco
-          const priceElement = button
-            .closest(".product")
-            .querySelector(".price");
-
-          priceElement.textContent = `R$ ${product.price}`;
-
-          break;
-
-        default:
-          alert("Opção inválida");
-          break;
+          default:
+            alert("Opção inválida");
+            break;
+        }
       }
     };
   });
