@@ -281,6 +281,7 @@ header #search button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 0px;
 }
 #products .product .text h2 {
@@ -289,8 +290,9 @@ header #search button:hover {
 }
 #products .product .text p {
     font-size: clamp(0.2rem, 0.9rem, 1rem);
+    max-width: 280px;
     font-weight: 600;
-    color: var(--grayFf);
+    color: var(--gray);
 }
 #products .product .price {
     font-weight: 700;
@@ -299,7 +301,25 @@ header #search button:hover {
 }
 
 /* Product Button */
-#products .product button {
+.product .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    height: 50px;
+    width: 250px;
+}
+.product .buttons button:active {
+    position: relative;
+    top: 3px;
+    box-shadow: 0px 0px 0px var(--dark-red);
+}
+.edit, .buy, .delete {
+    cursor: pointer;
+}
+
+/* Buy */
+.product .buttons .buy {
     padding: clamp(0.7rem, 3rem, 0.8rem) clamp(1.5rem, 4vw, 1.2rem);
 
     border-radius: 8px;
@@ -307,23 +327,37 @@ header #search button:hover {
     
     background-color: var(--dark-red);
 
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-weight: 700;
+    color: white;
+}
+.product .buttons .buy:hover {
+    background-color: var(--red);
+}
+
+/* Edit/Delete */
+.product .buttons .edit, .product .buttons .delete {
+    /* padding: clamp(0.7rem, 3rem, 0.2rem) clamp(1.5rem, 4vw, 0.2rem); */
+    height: 100%;
+    width: 50px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
+    border-radius: 8px;
+    border: none;
+    
+    border: 2px solid var(--dark-red);
+
     font-size: clamp(0.8rem, 2vw, 1.1rem);
-    font-weight: 700;
+    background-color: white;
+}
+.product .buttons .edit:hover, .product .buttons .delete:hover {
+    background-color: var(--dark-red);
     color: white;
-    cursor: pointer;
 }
-#products .product button:hover {
-    background-color: var(--red);
-}
-#products .product button:active {
-    position: relative;
-    top: 3px;
-    box-shadow: 0px 0px 0px var(--dark-red);
-}
+
 
 /* Add Button */
 #products #addbtn {
