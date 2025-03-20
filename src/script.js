@@ -16,7 +16,7 @@ const allProducts = [
 
 function addProduct() {
   const newProduct = {
-    imageUrl: "",
+    imageUrl: prompt("Digite a URL da imagem do seu novo produto:"),
     tags: addTags(),
     title: prompt("Digite o título do seu novo produto:"),
     description: prompt("Digite a descrição do seu novo produto:"),
@@ -47,6 +47,7 @@ function addProduct() {
 
   allProducts.push(newProduct);
   updateEditButtons();
+  updateDeleteButton();
 }
 
 function addTags() {
@@ -95,7 +96,7 @@ function updateEditButtons() {
       while (continueEditing) {
         const opt = Number(
           prompt(
-            "O que você deseja editar: \n1 - Tag \n2 - Título \n3 - Descrição \n4 - Preço \n5 - Sair e salvar"
+            "O que você deseja editar: \n1 - Tag \n2 - Título \n3 - Descrição \n4 - Preço \n5 - Imagem \n6 - Sair e salvar"
           )
         );
 
@@ -117,29 +118,30 @@ function updateEditButtons() {
               .map((tag, i) => `${i + 1} - ${tag}`)
               .join("\n");
             let tagIndex =
-              Number(prompt(`Escolha a tag para editar ou digite 0 para cancelar ou 100 pra adiconar uma nova tag:\n${tagList}`)) - 1;
+              Number(
+                prompt(
+                  `Escolha a tag para editar ou digite 0 para cancelar ou 100 pra adiconar uma nova tag:\n${tagList}`
+                )
+              ) - 1;
 
-            
-            if (tagIndex === 99) { // Adiciona uma nova tag
+            if (tagIndex === 99) {
+              // Adiciona uma nova tag
 
-              let addNewTag = prompt(
-                "Digite a nova tag que deseja adicionar:"
-              );
-              
+              let addNewTag = prompt("Digite a nova tag que deseja adicionar:");
+
               if (addNewTag) {
-                product.tags.push(addNewTag);                
+                product.tags.push(addNewTag);
               }
-              
-            } else if ( // Verifica se o índice é válido 
+            } else if (
+              // Verifica se o índice é válido
 
               tagIndex < 0 ||
               tagIndex >= product.tags.length ||
               isNaN(tagIndex)
-
             ) {
               break;
-
-            } else { // Pergunta a nova tag
+            } else {
+              // Pergunta a nova tag
 
               let newTag = prompt(
                 `Digite a nova tag para substituir "${product.tags[tagIndex]}":`
@@ -210,12 +212,29 @@ function updateEditButtons() {
 
             break;
 
-          case 5: // SAIR
+          case 5: // IMAGE
+            const newImage = prompt(
+              "Digite a url da nova imagem: ",
+              product.imageUrl || product.imageUrl
+            );
+
+            product.imageUrl = newImage;
+
+            // Atualizar o Html com a nova imagem
+            const imageElement = button
+              .closest(".product")
+              .querySelector("img");
+
+            imageElement.src = product.imageUrl;
+
+            break;
+
+          case 6: // SAIR
             continueEditing = false;
             break;
 
           default:
-            alert("Opção inválida");
+            continueEditing = false;
             break;
         }
       }
@@ -224,3 +243,19 @@ function updateEditButtons() {
 }
 
 updateEditButtons();
+
+function updateDeleteButton() {
+  const deleteButtons = document.querySelectorAll(".delete");
+
+  deleteButtons.forEach((button, index) => {
+    button.onclick = () => {
+      allProducts.splice(index, 1);
+
+      // Remover do HTML
+      const productElement = button.closest(".product");
+      productElement.remove();
+    }; //Button on click
+  }); //Delete Buttons
+}
+
+updateDeleteButton();
