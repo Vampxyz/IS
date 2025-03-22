@@ -1,0 +1,39 @@
+* {
+    scrollbar-width: thin;
+    scrollbar-color: red white;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    min-width: 100vw;
+    min-height: 100dvh;
+
+    background-color: #eee;
+}
+
+#clica {
+    padding: 1rem;
+
+    border-radius: 8px;
+    background-color: aliceblue;
+
+    cursor: pointer;
+
+    position: relative;
+
+    box-shadow: 0px 5px 0px black;
+    transition: box-shadow .2s;
+
+}
+
+#clica:hover {
+    background-color: rgba(240, 248, 255, 0.6);
+}
+
+#clica:active {
+    box-shadow: none;
+}
