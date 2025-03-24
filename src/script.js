@@ -4,6 +4,7 @@ const buttonBuy = document.getElementById("buy");
 const buttonsDelete = document.querySelectorAll(".delete");
 
 const products = document.getElementById("products");
+
 const allProducts = [
   // {
   //   imageUrl: "",
@@ -50,34 +51,30 @@ function addProduct() {
   updateDeleteButton();
 }
 
-function addTags() {
-  // Opções de tags
-  const tagOptions = {
-    1: ["Digite a primeira tag:"],
-    2: ["Digite a primeira tag:", "Digite a segunda tag:"],
-    3: [
-      "Digite a primeira tag:",
-      "Digite a segunda tag:",
-      "Digite a terceira tag:",
-    ],
-  };
+const tagInput = document.getElementById("tag-input");
+const tagsContainer = document.getElementById("tags-container");
+let selectedTags = [];
 
-  // Converte para um número inteiro para percorrer o array
-  const option = Number(
-    prompt(
-      "Escolha a quantidade de tags que você deseja adicionar: \n1 - Add uma tag \n2 - Add duas tags \n3 - Add três tags"
-    )
-  );
+tagInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Impede o envio do formulário
 
-  // Armazena as tags
-  const tags = [];
-
-  // Percorre a pergunta da opção escolhida
-  for (const question of tagOptions[option]) {
-    tags.push(prompt(question));
+    const newTag = tagInput.value.trim();
+    if (newTag && !selectedTags.includes(newTag)) {
+      selectedTags.push(newTag);
+      updateTagsUI();
+      tagInput.value = "";
+    }
   }
+});
 
-  return tags;
+function updateTagsUI() {
+  tagsContainer.innerHTML = selectedTags.map(tag => `<span class="tag">${tag} <i onclick="removeTag('${tag}')">x</i></span>`).join("");
+}
+
+function removeTag(tag) {
+  selectedTags = selectedTags.filter(t => t !== tag);
+  updateTagsUI();
 }
 
 buttonAdd.addEventListener("click", addProduct);

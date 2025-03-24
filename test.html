@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Input de Tags</title>
+    <style>
+        #tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 40px;
+        }
+        
+        .tag {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tag button {
+            margin-left: 5px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+    </style>
+  </head>
+  <body>
+    <div id="tag-container">
+      <input
+        type="text"
+        id="tag-input"
+        placeholder="Digite uma tag e pressione Enter"
+      />
+    </div>
+    <input type="hidden" id="hidden-tags" name="tags" />
+
+    <script>
+      const tagInput = document.getElementById("tag-input");
+      const tagContainer = document.getElementById("tag-container");
+      const hiddenTags = document.getElementById("hidden-tags");
+      let tags = [];
+
+      tagInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter" && tagInput.value.trim() !== "") {
+          event.preventDefault();
+          addTag(tagInput.value.trim());
+          tagInput.value = "";
+        }
+      });
+
+      function addTag(tag) {
+        if (!tags.includes(tag)) {
+          tags.push(tag);
+          updateTags();
+        }
+      }
+
+      function removeTag(tag) {
+        tags = tags.filter((t) => t !== tag);
+        updateTags();
+      }
+
+      function updateTags() {
+        tagContainer.innerHTML = "";
+        tags.forEach((tag) => {
+          const tagElement = document.createElement("div");
+          tagElement.classList.add("tag");
+          tagElement.textContent = tag;
+
+          const removeButton = document.createElement("button");
+          removeButton.textContent = "x";
+          removeButton.addEventListener("click", () => removeTag(tag));
+
+          tagElement.appendChild(removeButton);
+          tagContainer.appendChild(tagElement);
+        });
+
+        tagContainer.appendChild(tagInput);
+        hiddenTags.value = tags.join(",");
+      }
+    </script>
+  </body>
+</html>

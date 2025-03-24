@@ -217,6 +217,50 @@ header #search button:hover {
 #categories .nav-categories a:hover::before {
     width: 100%;
 }
+/* --------------------------------------------------------------Modal-------------------------------------------------------------- */
+#bg {
+    background-color: rgba(0, 0, 0, .75);
+    height: 100vh;
+    width: 100vw;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+.hidden {
+    
+}
+
+#bg .modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 12px;
+
+    position: relative;
+
+    padding: 2rem 15rem;
+
+
+    background-color: aqua;
+}
+
+#bg .modal .form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
 
 /* --------------------------------------------------------------Products-------------------------------------------------------------- */
 #products {
@@ -228,6 +272,8 @@ header #search button:hover {
     gap: 24px;
 
     width: fit-content;
+
+    position: relative;
 }
 #products h1 {
     font-weight: 700;
