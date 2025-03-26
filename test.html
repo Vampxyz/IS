@@ -33,12 +33,12 @@
     </style>
   </head>
   <body>
+    <input
+      type="text"
+      id="tag-input"
+      placeholder="Digite uma tag e pressione Enter"
+    />
     <div id="tag-container">
-      <input
-        type="text"
-        id="tag-input"
-        placeholder="Digite uma tag e pressione Enter"
-      />
     </div>
     <input type="hidden" id="hidden-tags" name="tags" />
 
@@ -83,7 +83,7 @@
           tagContainer.appendChild(tagElement);
         });
 
-        tagContainer.appendChild(tagInput);
+        <!-- tagContainer.appendChild(tagInput); -->
         hiddenTags.value = tags.join(",");
       }
     </script>

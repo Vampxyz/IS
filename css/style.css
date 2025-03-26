@@ -234,45 +234,177 @@ header #search button:hover {
     text-align: center;
     flex-direction: column;
 }
-.hidden {
-    
-}
 
+/* Modal */
 #bg .modal {
     display: flex;
     align-items: center;
-    justify-content: center;
     text-align: center;
     flex-direction: column;
     gap: 12px;
-
+    
     position: relative;
+    
+    padding: 2rem;
+    
+    width: 500px;
+    max-height: 600px;
+    
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: var(--bg);
+}
+/* Close modal */
+#bg .modal .close-btn {
+    position: absolute;
+    right: 30px;
+    top: 30px;
 
-    padding: 2rem 15rem;
-
-
-    background-color: aqua;
+    font-size: 1.3rem;
+    
+    cursor: pointer;
+    
+    border: none;
+    background: none;
+    background-color: none;
 }
 
+/* Modal text */
+#bg .modal .text {
+    margin: 20px;
+}
+.modal .text h1 {
+    color: var(--dark-red);
+}
+.modal .text h2 {
+    color: var(--gray);
+}
+
+/* Modal form */
 #bg .modal .form {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    gap: 8px;
+
+    width: 80%;
+}
+.modal .form input {
+    padding: .5rem;
+    width: 100%;
+
+    border-radius: 8px;
+    border: 1px solid var(--ice-blue);
+}
+
+/* Image options(FILE or URL) */
+.modal .form .opt-image {
+    display: flex;
+    justify-content: space-around;
+
+    height: 40px;
+    width: 100%;
+}
+.form .opt-image button {
+    height: 100%;
+    width: 100%;
+
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+
+    cursor: pointer;
+
+    font-weight: 400;
+
+    background: none;
+    background-color: none;
+}
+
+/* Image inputs(FILE and URL) */
+.modal .form .image-input {
+    display: flex;
+}
+.form .image-input input {
+    min-width: 347.19px;
+}
+
+/* Tag container */
+.modal .form .tag-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    border: 1px solid var(--ice-blue);
+    border-radius: 8px;
+
+    font-size: small;
+    font-weight: 700;
+
+    padding: 6px;
+    min-width: 100px;
+    width: fit-content;
+    min-height: 40px;
+}
+/* Tag */
+.form .tag-container .tag {
+    color: white;
+    font-weight: 700;
+    font-size: clamp(0.75rem, 2vw, 0.8rem);
+    text-transform: capitalize;
+
+    padding: 6px 10px;    
+
+    border-radius: 12px;
+    border: none;
+
+    width: fit-content;
+    height: fit-content;
+
+    background-color: var(--red);
+}
+
+/* Add product button */
+#bg .modal .add-product {
+    position: relative;
+
+    padding: .5rem 1rem;
+
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    color: white;
+    background-color: var(--dark-red);
+    box-shadow: 0px 4px 0px black;
+
+    transition: top .3s;
+}
+#bg .modal .add-product:hover {
+    background-color: var(--red);
+}
+#bg .modal .add-product:active {
+    box-shadow: none;
+    top: 4px;
+}
+
+.hidden {
+    display: none;
 }
 
 /* --------------------------------------------------------------Products-------------------------------------------------------------- */
 #products {
     padding: clamp(1rem, 4vw, 2rem) 0;
-
+    
     display: grid;
     grid-template-columns: repeat(3, 325px);
     grid-template-rows: repeat(1, 465px);
     gap: 24px;
-
+    
     width: fit-content;
-
+    
     position: relative;
 }
 #products h1 {

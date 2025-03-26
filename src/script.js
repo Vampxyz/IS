@@ -1,84 +1,88 @@
-// const products = document.querySelector("#products")
+// product
 const buttonAdd = document.getElementById("addbtn");
 const buttonBuy = document.getElementById("buy");
 const buttonsDelete = document.querySelectorAll(".delete");
-
 const products = document.getElementById("products");
 
-const allProducts = [
-  // {
-  //   imageUrl: "",
-  //   tags: ["Alimentos"],
-  //   title: "Coxinha",
-  //   description: "Coxinha de frango com catupiry",
-  //   price: "19,99",
-  // },
-];
+const allProducts = [];
 
+// modal
+const modalBg = document.getElementById("bg");
+const closeModal = document.getElementById("close-modal");
+
+// Type of image modal
+const fileImg = document.getElementById("file-img");
+const urlImg = document.getElementById("url-img");
+
+// Input modal
+const fileInput = document.getElementById("file-input");
+const urlInput = document.getElementById("url-input");
+const title = document.getElementById("title-input");
+const description = document.getElementById("desc-input");
+const price = document.getElementById("price-input");
+
+// Close modal
+closeModal.onclick = () => {
+  modalBg.style.display = "none";
+};
+
+// Image options
+fileImg.onclick = () => {
+  fileInput.style.display = "block";
+  fileImg.style.fontWeight = "700";
+
+  urlInput.style.display = "none";
+  urlImg.style.fontWeight = "400";
+};
+urlImg.onclick = () => {
+  urlInput.style.display = "block";
+  urlImg.style.fontWeight = "700";
+
+  fileInput.style.display = "none";
+  fileImg.style.fontWeight = "400";
+};
+
+// Add product
 function addProduct() {
-  const newProduct = {
-    imageUrl: prompt("Digite a URL da imagem do seu novo produto:"),
-    tags: addTags(),
-    title: prompt("Digite o título do seu novo produto:"),
-    description: prompt("Digite a descrição do seu novo produto:"),
-    price: prompt("Digite o preço do seu novo produto:"),
-  };
+  // const newProduct = {
+  //   imageUrl: urlInput.value,
+  //   tags: addTags(),
+  //   title: title.value,
+  //   description: description.value,
+  //   price: price.value,
+  // };
 
-  const productHTML = `
-        <div class="product">
-            <img src="${newProduct.imageUrl}" alt="" />
-            <div class="tag">
-                ${newProduct.tags.map((tag) => `<span>${tag}</span>`).join("")}
-            </div>
-            <div class="text">
-                <h2>${newProduct.title}</h2>
-                <p>${newProduct.description}</p>
-            </div>
-            <p class="price">R$ ${newProduct.price}</p>
-            <div class="buttons">
-                <button class="edit"><i class="fi fi-rr-pencil"></i></button>
-                <button class="buy">Comprar</button>
-                <button class="delete"><i class="fi fi-rr-trash"></i></button>
-            </div>
-        </div>
-    `;
+  // const productHTML = `
+  //       <div class="product">
+  //           <img src="${newProduct.imageUrl}" alt="" />
+  //           <div class="tag">
+  //               ${newProduct.tags.map((tag) => `<span>${tag}</span>`).join("")}
+  //           </div>
+  //           <div class="text">
+  //               <h2>${newProduct.title}</h2>
+  //               <p>${newProduct.description}</p>
+  //           </div>
+  //           <p class="price">R$ ${newProduct.price}</p>
+  //           <div class="buttons">
+  //               <button class="edit"><i class="fi fi-rr-pencil"></i></button>
+  //               <button class="buy">Comprar</button>
+  //               <button class="delete"><i class="fi fi-rr-trash"></i></button>
+  //           </div>
+  //       </div>
+  //   `;
 
-  // Adiciona o produto novo depois do último produto adicionado
-  products.insertAdjacentHTML("beforeend", productHTML);
+  // // Adiciona o produto novo depois do último produto adicionado
+  // products.insertAdjacentHTML("beforeend", productHTML);
 
-  allProducts.push(newProduct);
-  updateEditButtons();
-  updateDeleteButton();
+  // allProducts.push(newProduct);
+  // updateEditButtons();
+  // updateDeleteButton();
+
+  modalBg.style.display = "flex";
 }
-
-const tagInput = document.getElementById("tag-input");
-const tagsContainer = document.getElementById("tags-container");
-let selectedTags = [];
-
-tagInput.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault(); // Impede o envio do formulário
-
-    const newTag = tagInput.value.trim();
-    if (newTag && !selectedTags.includes(newTag)) {
-      selectedTags.push(newTag);
-      updateTagsUI();
-      tagInput.value = "";
-    }
-  }
-});
-
-function updateTagsUI() {
-  tagsContainer.innerHTML = selectedTags.map(tag => `<span class="tag">${tag} <i onclick="removeTag('${tag}')">x</i></span>`).join("");
-}
-
-function removeTag(tag) {
-  selectedTags = selectedTags.filter(t => t !== tag);
-  updateTagsUI();
-}
-
 buttonAdd.addEventListener("click", addProduct);
 
+// Update edit buttons
 function updateEditButtons() {
   const editButtons = document.querySelectorAll(".edit");
 
@@ -238,9 +242,9 @@ function updateEditButtons() {
     };
   });
 }
-
 updateEditButtons();
 
+// Update delete buttons
 function updateDeleteButton() {
   const deleteButtons = document.querySelectorAll(".delete");
 
@@ -254,5 +258,4 @@ function updateDeleteButton() {
     }; //Button on click
   }); //Delete Buttons
 }
-
 updateDeleteButton();

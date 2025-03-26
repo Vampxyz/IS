@@ -44,26 +44,82 @@
     </div>
 
     <!-- Bg -->
-    <div id="bg" class="hidden">
-
+    <div id="bg">
       <!-- Modal -->
       <div class="modal">
-        <h1>Add a Product</h1>
-        <h2>Fill the inputs</h2>
-        
+        <button id="close-modal" class="close-btn"><i class="fi fi-rr-cross"></i></button>
+        <div class="text">
+          <h1>Adicione um produto</h1>
+          <h2>Preencha os campos</h2>
+        </div>
+
         <!-- Inputs -->
         <div class="form">
-          <input type="file" name="" id="img">
-          <select name="tags" id="tags">
-            <option value="1">1 tag</option>
-            <option value="2">2 tag</option>
-            <option value="3">3 tag</option>
-            <option value="4">4 tag</option>
-            <option value="5">5 tag</option>
-          </select>
-          <input type="" name="" id="tag">
+          <!-- Image -->
+          <div id="opt-image" class="opt-image">
+            <button id="file-img" class="file">File image</button>
+            <button id="url-img" class="url">URL image</button>
+          </div>
+
+          <div id="image-input" class="image-input">
+            <input
+              type="file"
+              id="file-input"
+              class="file-input"
+              style="display: none"
+            />
+            <input
+              type="url"
+              id="url-input"
+              class="url-input"
+              placeholder="Cole a URL da imagem"
+              style="display: block"
+            />
+          </div>
+
+          <!-- Tag -->
+          <input
+            type="text"
+            id="tag-input"
+            class="tag-input"
+            placeholder="Digite a(s) tag(s) e pressione enter"
+          />
+          <div id="tag-container" class="tag-container">
+            <p class="tag">Alimentos</p>
+            <p class="tag">Alimentos</p>
+          </div>
+          <input type="hidden" id="hidden-tags" />
+
+          <!-- Title -->
+          <input
+            type="text"
+            name=""
+            id="title-input"
+            class="title-input"
+            placeholder="Digite o título"
+          />
+
+          <!-- Description -->
+          <input
+            type="text"
+            name=""
+            id="desc-input"
+            class="desc-input"
+            placeholder="Digite a descrição"
+          />
+
+          <!-- Price -->
+          <input
+            type="number"
+            name=""
+            id="price-input"
+            class="price-input"
+            placeholder="Digite o preço"
+          />
         </div>
-        
+
+        <!-- Add product -->
+        <button id="add-product" class="add-product">Adicionar</button>
       </div>
     </div>
 
@@ -92,12 +148,10 @@
       <div id="products">
         <!-- Add button -->
         <button id="addbtn"><i class="fi fi-rr-plus"></i></button>
-        
 
         <!-- Product -->
         <!-- The product will be added here -->
 
-        
         <!-- <div class="product">
           <img src="" alt="" />
           <div class="tag">
@@ -131,9 +185,6 @@
             <button class="delete"><i class="fi fi-rr-trash"></i></button>
           </div>
         </div> -->
-
-        
-
       </div>
     </div>
 
