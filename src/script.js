@@ -9,6 +9,7 @@ const allProducts = [];
 // modal
 const modalBg = document.getElementById("bg");
 const closeModal = document.getElementById("close-modal");
+const submitProduct = document.getElementById("submit-product");
 
 // Type of image modal
 const fileImg = document.getElementById("file-img");
@@ -21,6 +22,16 @@ const title = document.getElementById("title-input");
 const description = document.getElementById("desc-input");
 const price = document.getElementById("price-input");
 
+// Tag input modal
+const tagInput = document.getElementById("tag-input");
+const tagContainer = document.getElementById("tag-container");
+const tagHidden = document.getElementById("hidden-tags");
+let tags = [];
+
+// Open modal
+buttonAdd.addEventListener("click", () => {
+  modalBg.style.display = "flex";
+});
 // Close modal
 closeModal.onclick = () => {
   modalBg.style.display = "none";
@@ -29,58 +40,121 @@ closeModal.onclick = () => {
 // Image options
 fileImg.onclick = () => {
   fileInput.style.display = "block";
+  fileInput.style.borderColor = "#000";
   fileImg.style.fontWeight = "700";
+  fileImg.style.color = "var(--dark-red)";
 
   urlInput.style.display = "none";
+  urlInput.style.borderColor = "var(--gray)";
   urlImg.style.fontWeight = "400";
+  urlImg.style.color = "black";
 };
 urlImg.onclick = () => {
   urlInput.style.display = "block";
+  urlInput.style.borderColor = "#000";
   urlImg.style.fontWeight = "700";
+  urlImg.style.color = "var(--dark-red)";
 
   fileInput.style.display = "none";
+  urlInput.style.borderColor = "var(--gray)";
   fileImg.style.fontWeight = "400";
+  fileImg.style.color = "black";
 };
 
 // Add product
-function addProduct() {
-  // const newProduct = {
-  //   imageUrl: urlInput.value,
-  //   tags: addTags(),
-  //   title: title.value,
-  //   description: description.value,
-  //   price: price.value,
-  // };
+submitProduct.addEventListener("click", () => {
+  addProduct();
 
-  // const productHTML = `
-  //       <div class="product">
-  //           <img src="${newProduct.imageUrl}" alt="" />
-  //           <div class="tag">
-  //               ${newProduct.tags.map((tag) => `<span>${tag}</span>`).join("")}
-  //           </div>
-  //           <div class="text">
-  //               <h2>${newProduct.title}</h2>
-  //               <p>${newProduct.description}</p>
-  //           </div>
-  //           <p class="price">R$ ${newProduct.price}</p>
-  //           <div class="buttons">
-  //               <button class="edit"><i class="fi fi-rr-pencil"></i></button>
-  //               <button class="buy">Comprar</button>
-  //               <button class="delete"><i class="fi fi-rr-trash"></i></button>
-  //           </div>
-  //       </div>
-  //   `;
+  urlInput.value = "";
+  title.value = "";
+  description.value = "";
+  price.value = "";
+  
+  modalBg.style.display = "none";
+});
 
-  // // Adiciona o produto novo depois do último produto adicionado
-  // products.insertAdjacentHTML("beforeend", productHTML);
+function addProduct() {  
+  let imageUrl = urlInput.value;
 
-  // allProducts.push(newProduct);
-  // updateEditButtons();
-  // updateDeleteButton();
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0]; // Obtém o arquivo
+    imageUrl = URL.createObjectURL(file); // Cria uma URL temporária
+  }
 
-  modalBg.style.display = "flex";
+  const newProduct = {
+    image: imageUrl,
+    tags: [...tags],
+    title: title.value,
+    description: description.value,
+    price: price.value,
+  };
+
+  const productHTML = `
+        <div class="product">
+            <img src="${newProduct.image}" alt="" />
+            <div class="tag">
+                ${tags.map((tag) => `<span>${tag}</span>`).join("")}
+            </div>
+            <div class="text">
+                <h2>${newProduct.title}</h2>
+                <p>${newProduct.description}</p>
+            </div>
+            <p class="price">R$ ${newProduct.price}</p>
+            <div class="buttons">
+                <button class="edit"><i class="fi fi-rr-pencil"></i></button>
+                <button class="buy">Comprar</button>
+                <button class="delete"><i class="fi fi-rr-trash"></i></button>
+            </div>
+        </div>
+    `;
+
+  // Adiciona o produto novo depois do último produto adicionado
+  products.insertAdjacentHTML("beforeend", productHTML);
+
+  allProducts.push(newProduct);
+  updateEditButtons();
+  updateDeleteButton();
 }
-buttonAdd.addEventListener("click", addProduct);
+
+// Add tag
+tagInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter" && tagInput.value.trim() !== "") {
+    //Se a tecla pressionada for o ENTER e o input nao for vazio
+    e.preventDefault();
+    addTag(tagInput.value.trim());
+    tagInput.value = "";
+  }
+});
+function addTag(tag) {
+  if (!tags.includes(tag)) {
+    // Se a tag atual nao existir no array tags
+    tags.push(tag);
+    updateTags();
+  }
+}
+// Update Tags
+function updateTags() {
+  tagContainer.innerHTML = "";
+  tags.forEach((tag) => {
+    const tagElement = document.createElement("div");
+    tagElement.classList.add("tag");
+    tagElement.textContent = tag;
+
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "X";
+    removeButton.addEventListener("click", () => removeTag(tag));
+
+    tagElement.appendChild(removeButton);
+    tagContainer.appendChild(tagElement);
+  });
+
+  tagHidden.value = tags.join(",");
+}
+// Remove Tag
+function removeTag(tag) {
+  tags = tags.filter((t) => t !== tag);
+  updateTags();
+}
 
 // Update edit buttons
 function updateEditButtons() {

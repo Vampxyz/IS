@@ -56,27 +56,31 @@
         <!-- Inputs -->
         <div class="form">
           <!-- Image -->
-          <div id="opt-image" class="opt-image">
-            <button id="file-img" class="file">File image</button>
-            <button id="url-img" class="url">URL image</button>
-          </div>
+          <div class="image">
 
-          <div id="image-input" class="image-input">
-            <input
+            <div id="opt-image" class="opt-image">
+              <button id="file-img" class="file">File image</button>
+              <button id="url-img" class="url">URL image</button>
+            </div>
+            
+            <div id="image-input" class="image-input">
+              <input
               type="file"
               id="file-input"
               class="file-input"
               style="display: none"
-            />
-            <input
+              accept="image/png, image/jpeg"
+              />
+              <input
               type="url"
               id="url-input"
               class="url-input"
               placeholder="Cole a URL da imagem"
-              style="display: block"
-            />
+              style="display: none"
+              />
+            </div>
           </div>
-
+            
           <!-- Tag -->
           <input
             type="text"
@@ -85,8 +89,7 @@
             placeholder="Digite a(s) tag(s) e pressione enter"
           />
           <div id="tag-container" class="tag-container">
-            <p class="tag">Alimentos</p>
-            <p class="tag">Alimentos</p>
+            
           </div>
           <input type="hidden" id="hidden-tags" />
 
@@ -119,7 +122,7 @@
         </div>
 
         <!-- Add product -->
-        <button id="add-product" class="add-product">Adicionar</button>
+        <button id="submit-product" class="add-product">Adicionar</button>
       </div>
     </div>
 
