@@ -219,7 +219,7 @@ header #search button:hover {
     width: 100%;
 }
 /* --------------------------------------------------------------Modal-------------------------------------------------------------- */
-#bg {
+.bg {
     background-color: rgba(0, 0, 0, .75);
     height: 100vh;
     width: 100vw;
@@ -237,7 +237,7 @@ header #search button:hover {
 }
 
 /* Modal */
-#bg .modal {
+.bg .modal {
     display: flex;
     align-items: center;
     text-align: center;
@@ -256,7 +256,7 @@ header #search button:hover {
     background-color: var(--bg);
 }
 /* Close modal */
-#bg .modal .close-btn {
+.bg .modal .close-btn {
     position: absolute;
     right: 30px;
     top: 30px;
@@ -271,7 +271,7 @@ header #search button:hover {
 }
 
 /* Modal text */
-#bg .modal .text {
+.bg .modal .text {
     margin: 20px;
 }
 .modal .text h1 {
@@ -282,7 +282,7 @@ header #search button:hover {
 }
 
 /* Modal form */
-#bg .modal .form {
+.bg .modal .form {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -399,7 +399,7 @@ header #search button:hover {
 }
 
 /* Add product button */
-#bg .modal .add-product {
+.bg .modal .add-product {
     position: relative;
 
     padding: .5rem 1rem;
@@ -414,10 +414,10 @@ header #search button:hover {
 
     transition: top .3s;
 }
-#bg .modal .add-product:hover {
+.bg .modal .add-product:hover {
     background-color: var(--red);
 }
-#bg .modal .add-product:active {
+.bg .modal .add-product:active {
     box-shadow: none;
     top: 4px;
 }

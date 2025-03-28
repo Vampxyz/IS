@@ -43,11 +43,11 @@
       <button>Confira Agora!</button>
     </div>
 
-    <!-- Bg -->
-    <div id="bg">
-      <!-- Modal -->
-      <div class="modal">
-        <button id="close-modal" class="close-btn"><i class="fi fi-rr-cross"></i></button>
+    <!-- Bg product -->
+    <div id="bg-product" class="bg hidden">
+      <!-- Modal product -->
+      <div class="modal-product modal">
+        <button id="close-modal-product" class="close-btn"><i class="fi fi-rr-cross"></i></button>
         <div class="text">
           <h1>Adicione um produto</h1>
           <h2>Preencha os campos</h2>
@@ -125,6 +125,90 @@
         <button id="submit-product" class="add-product">Adicionar</button>
       </div>
     </div>
+
+    <!-- Bg edit -->
+     <div id="bg-edit" class="bg hidden">
+      <!-- Modal edit -->
+       <div class="modal-product modal">
+        <button id="close-modal-edit" class="close-btn"><i class="fi fi-rr-cross"></i></button>
+        <div class="text">
+          <h1>Edite o produto</h1>
+          <h2>Preencha os campos</h2>
+        </div>
+
+        <div class="form">
+          <!-- Image -->
+          <div class="image">
+
+            <div id="opt-image" class="opt-image">
+              <button id="file-img" class="file">File image</button>
+              <button id="url-img" class="url">URL image</button>
+            </div>
+            
+            <div id="image-input" class="image-input">
+              <input
+              type="file"
+              id="file-input"
+              class="file-input"
+              style="display: none"
+              accept="image/png, image/jpeg"
+              />
+              <input
+              type="url"
+              id="url-input"
+              class="url-input"
+              placeholder="Cole a URL da imagem"
+              style="display: none"
+              />
+            </div>
+          </div>
+            
+          <!-- Tag -->
+          <input
+            type="text"
+            id="tag-input"
+            class="tag-input"
+            placeholder="Digite a(s) tag(s) e pressione enter"
+          />
+          <div id="tag-container" class="tag-container">
+            
+          </div>
+          <input type="hidden" id="hidden-tags" />
+
+          <!-- Title -->
+          <input
+            type="text"
+            name=""
+            id="title-input"
+            class="title-input"
+            placeholder="Digite o título"
+          />
+
+          <!-- Description -->
+          <input
+            type="text"
+            name=""
+            id="desc-input"
+            class="desc-input"
+            placeholder="Digite a descrição"
+          />
+
+          <!-- Price -->
+          <input
+            type="number"
+            name=""
+            id="price-input"
+            class="price-input"
+            placeholder="Digite o preço"
+          />
+        </div>
+
+        <!-- Edit product -->
+        <button id="submit-product" class="add-product">Sair e salvar</button>
+
+        </div>
+       </div>
+     </div>
 
     <!-- Categories -->
     <div id="categories">

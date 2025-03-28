@@ -6,9 +6,9 @@ const products = document.getElementById("products");
 
 const allProducts = [];
 
-// modal
-const modalBg = document.getElementById("bg");
-const closeModal = document.getElementById("close-modal");
+// Modal product
+const modalBg = document.getElementById("bg-product");
+const closeModalProduct = document.getElementById("close-modal-product");
 const submitProduct = document.getElementById("submit-product");
 
 // Type of image modal
@@ -28,13 +28,21 @@ const tagContainer = document.getElementById("tag-container");
 const tagHidden = document.getElementById("hidden-tags");
 let tags = [];
 
+// Modal edit
+const editBg = document.getElementById("bg-edit");
+const closeModalEdit = document.getElementById("close-modal-edit");
+
 // Open modal
 buttonAdd.addEventListener("click", () => {
   modalBg.style.display = "flex";
 });
 // Close modal
-closeModal.onclick = () => {
+closeModalProduct.onclick = () => {
   modalBg.style.display = "none";
+};
+
+closeModalEdit.onclick = () => {
+  editBg.style.display = "none";
 };
 
 // Image options
@@ -69,11 +77,11 @@ submitProduct.addEventListener("click", () => {
   title.value = "";
   description.value = "";
   price.value = "";
-  
+
   modalBg.style.display = "none";
 });
 
-function addProduct() {  
+function addProduct() {
   let imageUrl = urlInput.value;
 
   if (fileInput.files.length > 0) {
@@ -132,6 +140,7 @@ function addTag(tag) {
     updateTags();
   }
 }
+
 // Update Tags
 function updateTags() {
   tagContainer.innerHTML = "";
@@ -156,163 +165,164 @@ function removeTag(tag) {
   updateTags();
 }
 
-// Update edit buttons
+// Edit product
 function updateEditButtons() {
   const editButtons = document.querySelectorAll(".edit");
-
+  
   editButtons.forEach((button, index) => {
     button.onclick = () => {
+      editBg.style.display = "flex";
       // Produto atual
       const product = allProducts[index];
 
       // Loop pra editar
-      let continueEditing = true;
+      // let continueEditing = true;
 
-      while (continueEditing) {
-        const opt = Number(
-          prompt(
-            "O que você deseja editar: \n1 - Tag \n2 - Título \n3 - Descrição \n4 - Preço \n5 - Imagem \n6 - Sair e salvar"
-          )
-        );
+      // while (continueEditing) {
+      //   const opt = Number(
+      //     prompt(
+      //       "O que você deseja editar: \n1 - Tag \n2 - Título \n3 - Descrição \n4 - Preço \n5 - Imagem \n6 - Sair e salvar"
+      //     )
+      //   );
 
-        switch (opt) {
-          case 1: // TAG
-            // Verifica se product.tags existe e é um array
-            if (!Array.isArray(product.tags)) {
-              product.tags = [];
-            }
+      //   switch (opt) {
+      //     case 1: // TAG
+      //       // Verifica se product.tags existe e é um array
+      //       if (!Array.isArray(product.tags)) {
+      //         product.tags = [];
+      //       }
 
-            // Verificador de tags
-            if (product.tags.length === 0) {
-              alert("Este produto não tem tags para editar.");
-              break;
-            }
+      //       // Verificador de tags
+      //       if (product.tags.length === 0) {
+      //         alert("Este produto não tem tags para editar.");
+      //         break;
+      //       }
 
-            // Exibe as tags disponíveis com índice
-            let tagList = product.tags
-              .map((tag, i) => `${i + 1} - ${tag}`)
-              .join("\n");
-            let tagIndex =
-              Number(
-                prompt(
-                  `Escolha a tag para editar ou digite 0 para cancelar ou 100 pra adiconar uma nova tag:\n${tagList}`
-                )
-              ) - 1;
+      //       // Exibe as tags disponíveis com índice
+      //       let tagList = product.tags
+      //         .map((tag, i) => `${i + 1} - ${tag}`)
+      //         .join("\n");
+      //       let tagIndex =
+      //         Number(
+      //           prompt(
+      //             `Escolha a tag para editar ou digite 0 para cancelar ou 100 pra adiconar uma nova tag:\n${tagList}`
+      //           )
+      //         ) - 1;
 
-            if (tagIndex === 99) {
-              // Adiciona uma nova tag
+      //       if (tagIndex === 99) {
+      //         // Adiciona uma nova tag
 
-              let addNewTag = prompt("Digite a nova tag que deseja adicionar:");
+      //         let addNewTag = prompt("Digite a nova tag que deseja adicionar:");
 
-              if (addNewTag) {
-                product.tags.push(addNewTag);
-              }
-            } else if (
-              // Verifica se o índice é válido
+      //         if (addNewTag) {
+      //           product.tags.push(addNewTag);
+      //         }
+      //       } else if (
+      //         // Verifica se o índice é válido
 
-              tagIndex < 0 ||
-              tagIndex >= product.tags.length ||
-              isNaN(tagIndex)
-            ) {
-              break;
-            } else {
-              // Pergunta a nova tag
+      //         tagIndex < 0 ||
+      //         tagIndex >= product.tags.length ||
+      //         isNaN(tagIndex)
+      //       ) {
+      //         break;
+      //       } else {
+      //         // Pergunta a nova tag
 
-              let newTag = prompt(
-                `Digite a nova tag para substituir "${product.tags[tagIndex]}":`
-              );
+      //         let newTag = prompt(
+      //           `Digite a nova tag para substituir "${product.tags[tagIndex]}":`
+      //         );
 
-              if (newTag) {
-                product.tags[tagIndex] = newTag;
-              }
-            }
+      //         if (newTag) {
+      //           product.tags[tagIndex] = newTag;
+      //         }
+      //       }
 
-            // Atualiza as tags no HTML
-            const productElement = button.closest(".product"); // Seleciona o produto certo
-            const tagContainer = productElement.querySelector(".tag");
-            tagContainer.innerHTML = product.tags
-              .map((tag) => `<span>${tag}</span>`)
-              .join("");
+      //       // Atualiza as tags no HTML
+      //       const productElement = button.closest(".product"); // Seleciona o produto certo
+      //       const tagContainer = productElement.querySelector(".tag");
+      //       tagContainer.innerHTML = product.tags
+      //         .map((tag) => `<span>${tag}</span>`)
+      //         .join("");
 
-            break;
+      //       break;
 
-          case 2: // TITLE
-            const newTitle = prompt(
-              "Digite o novo título: ",
-              product.title || product.title
-            );
+      //     case 2: // TITLE
+      //       const newTitle = prompt(
+      //         "Digite o novo título: ",
+      //         product.title || product.title
+      //       );
 
-            product.title = newTitle;
+      //       product.title = newTitle;
 
-            // Atualizar o Html com o novo titulo
-            const titleElement = button
-              .closest(".product")
-              .querySelector(".text h2");
+      //       // Atualizar o Html com o novo titulo
+      //       const titleElement = button
+      //         .closest(".product")
+      //         .querySelector(".text h2");
 
-            titleElement.textContent = product.title;
+      //       titleElement.textContent = product.title;
 
-            break;
+      //       break;
 
-          case 3: // DESCRIPTION
-            const newDesc = prompt(
-              "Digite a nova descrição: ",
-              product.description || product.description
-            );
+      //     case 3: // DESCRIPTION
+      //       const newDesc = prompt(
+      //         "Digite a nova descrição: ",
+      //         product.description || product.description
+      //       );
 
-            product.description = newDesc;
+      //       product.description = newDesc;
 
-            // Atualizar o Html com a nova descrição
-            const descElement = button
-              .closest(".product")
-              .querySelector(".text p");
+      //       // Atualizar o Html com a nova descrição
+      //       const descElement = button
+      //         .closest(".product")
+      //         .querySelector(".text p");
 
-            descElement.textContent = product.description;
+      //       descElement.textContent = product.description;
 
-            break;
+      //       break;
 
-          case 4: // PRICE
-            const newPrice = prompt(
-              "Digite o novo preço: ",
-              product.price || product.price
-            );
+      //     case 4: // PRICE
+      //       const newPrice = prompt(
+      //         "Digite o novo preço: ",
+      //         product.price || product.price
+      //       );
 
-            product.price = newPrice;
+      //       product.price = newPrice;
 
-            // Atualizar o Html com o novo preco
-            const priceElement = button
-              .closest(".product")
-              .querySelector(".price");
+      //       // Atualizar o Html com o novo preco
+      //       const priceElement = button
+      //         .closest(".product")
+      //         .querySelector(".price");
 
-            priceElement.textContent = `R$ ${product.price}`;
+      //       priceElement.textContent = `R$ ${product.price}`;
 
-            break;
+      //       break;
 
-          case 5: // IMAGE
-            const newImage = prompt(
-              "Digite a url da nova imagem: ",
-              product.imageUrl || product.imageUrl
-            );
+      //     case 5: // IMAGE
+      //       const newImage = prompt(
+      //         "Digite a url da nova imagem: ",
+      //         product.imageUrl || product.imageUrl
+      //       );
 
-            product.imageUrl = newImage;
+      //       product.imageUrl = newImage;
 
-            // Atualizar o Html com a nova imagem
-            const imageElement = button
-              .closest(".product")
-              .querySelector("img");
+      //       // Atualizar o Html com a nova imagem
+      //       const imageElement = button
+      //         .closest(".product")
+      //         .querySelector("img");
 
-            imageElement.src = product.imageUrl;
+      //       imageElement.src = product.imageUrl;
 
-            break;
+      //       break;
 
-          case 6: // SAIR
-            continueEditing = false;
-            break;
+      //     case 6: // SAIR
+      //       continueEditing = false;
+      //       break;
 
-          default:
-            continueEditing = false;
-            break;
-        }
-      }
+      //     default:
+      //       continueEditing = false;
+      //       break;
+      //   }
+      // }
     };
   });
 }
